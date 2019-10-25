@@ -35,3 +35,18 @@
 # test_4
 # 1
 # 2
+
+
+def print_result(fn):
+    def wrapper(*args):
+        print(fn.__name__)
+        result = fn(*args)
+        if isinstance(result, list):
+            print('\n'.join([str(x) for x in result]))
+        elif isinstance(result, dict):
+            print('\n'.join(['{0} = {1}'.format(key, value) for key, value in result.items()]))
+        else:
+            print(result)
+        return result
+
+    return wrapper
